@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from googletrans import Translator
 import time
+import datetime
 Builder.load_file("Trow.kv")
 
 
