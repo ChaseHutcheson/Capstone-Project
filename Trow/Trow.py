@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
+from googletrans import Translator
 import time
 Builder.load_file("Trow.kv")
 
@@ -19,7 +20,11 @@ class PhotoTranslate(Screen):
 
 
 class TextTranslate(Screen):
-    pass
+    def translation(self):
+        text = self.ids.text_untranslated.text
+        translator = Translator()
+        translation = translator.translate(f'{text}', dest='es')
+        self.ids.text_translated.text = f"{translation.text}"
 
 class TranslateHistory(Screen):
     pass

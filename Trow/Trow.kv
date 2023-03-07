@@ -3,7 +3,7 @@
     background_normal: ''
     canvas.before:
         Color:
-            rgba: (48/255,84/255,150/255,1)
+            rgba: (37/255,150/255,190/255,1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -59,10 +59,10 @@
             play: True
         BoxLayout:
             orientation:'horizontal'
-            Button:
+            RoundedButton:
                 text: 'Translate'
                 on_press: root.capture()     
-            Button:
+            RoundedButton:
                 text: "Return to menu"
                 on_press: 
                     root.manager.transition.direction = 'left'
@@ -79,14 +79,23 @@
             size: self.size
     BoxLayout:
         orientation: 'vertical'
+        TextInput:
+            id: text_untranslated
+            hint_text: 'Input Text Here'
         Label:
-            text:'Text-Translate'
+            id: text_translated
+            text: 'No text Input'
             color: 1, 0, 0, 1
-        Button:
-            text: "Return to menu"
-            on_press: 
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'
+        BoxLayout:
+            orientation:'horizontal'
+            RoundedButton:
+                text: "Return to menu"
+                on_press: 
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'menu'
+            RoundedButton:
+                text: "Translate"
+                on_press: root.translation()
 
 <TranslateHistory>:
     #background color
@@ -101,7 +110,7 @@
         Label:
             text:'History'
             color: 1, 0, 0, 1
-        Button:
+        RoundedButton:
             text: "Return to menu"
             on_press: 
                 root.manager.transition.direction = 'down'
