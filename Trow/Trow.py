@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.core.window import Window
 import time
 Builder.load_file("Trow.kv")
 
@@ -25,6 +26,7 @@ class TranslateHistory(Screen):
 
 class Main(App):
     def build(self):
+        Window.clearcolor = (1, 1, 1, 1)
         sm = ScreenManager()
         sm.add_widget(MainMenu(name='menu'))
         sm.add_widget(PhotoTranslate(name='photo_translate'))

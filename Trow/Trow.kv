@@ -1,21 +1,42 @@
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (48/255,84/255,150/255,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
 <MainMenu>:
+    #background color
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text:'Trow'
+        Image:
+            source: 'images/Trow_Logo_Black.png'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         BoxLayout:
             orientation: 'horizontal'
-            Button:
+            padding: ('3dp', '3dp', '3dp', '3dp')
+            spacing: '3dp'
+            RoundedButton:
                 text: "Photo Translate"
                 on_press: 
                     root.manager.transition.direction = 'right'
                     root.manager.current = 'photo_translate'
-            Button:
+            RoundedButton:
                 text: "History"
                 on_press: 
                     root.manager.transition.direction = 'up'
                     root.manager.current = 'history'
-            Button:
+            RoundedButton:
                 text: "Text translate"
                 on_press: 
                     root.manager.transition.direction = 'left'
@@ -23,29 +44,44 @@
 
 
 <PhotoTranslate>:
+    #background color
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
     BoxLayout:
         orientation:'vertical'
         Camera:
             id: cam
             resolution: (640, 480)
             play: True
-        Button:
-            text: 'Translate'
-            size_hint_y: None
-            height: '48dp'
-            on_press: root.capture()     
-        Button:
-            text: "Return to menu"
-            on_press: 
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'menu'
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                text: 'Translate'
+                on_press: root.capture()     
+            Button:
+                text: "Return to menu"
+                on_press: 
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'menu'
   
 
 <TextTranslate>:
+    #background color
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
             text:'Text-Translate'
+            color: 1, 0, 0, 1
         Button:
             text: "Return to menu"
             on_press: 
@@ -53,10 +89,18 @@
                 root.manager.current = 'menu'
 
 <TranslateHistory>:
+    #background color
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
             text:'History'
+            color: 1, 0, 0, 1
         Button:
             text: "Return to menu"
             on_press: 
