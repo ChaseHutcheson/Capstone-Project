@@ -1,8 +1,9 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
+from kivy.metrics import dp
 from googletrans import Translator
 import pytesseract as pytess
 pytess.pytesseract.tesseract_cmd = r'Trow\\Tesseract-OCR\\tesseract.exe'
@@ -36,7 +37,7 @@ class TextTranslate(Screen):
 class TranslateHistory(Screen):
     pass
 
-class Main(App):
+class Main(MDApp):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         sm = ScreenManager()

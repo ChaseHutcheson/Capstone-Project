@@ -18,16 +18,23 @@
             pos:self.pos
             size: self.size
     BoxLayout:
-        orientation: 'vertical'
+        orientation:'vertical'
+        spacing: '12dp'
+        padding: '12dp'
         Image:
             source: 'images/Trow_Logo_Black.png'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+            pos_hint: {'center_x': 0.5, 'center_y': 1}
+        Label:
+            text:'Translations when you need.'
+            size_hint: 1,.25
+            color: 0, 0, 0, 1
+            bold: True
         GridLayout:
             cols: 3
             rows: 1
             size_hint: 1,.5 
-            padding: ('3dp', '3dp', '3dp', '3dp')
-            spacing: '3dp'
+            padding: ('10dp', '10dp', '10dp', '10dp')
+            spacing: '10dp'
             RoundedButton:
                 text: "Photo Translate"
                 on_press: 
@@ -55,6 +62,8 @@
             size: self.size
     BoxLayout:
         orientation:'vertical'
+        spacing: '12dp'
+        padding: '12dp'
         Camera:
             id: cam
             resolution: (640, 480)
@@ -62,9 +71,11 @@
         Label:
             id: photo_untranslated
             text:''
-            color: 1, 0, 0, 1
+            color: 0, 0, 0, 1
         BoxLayout:
             orientation:'horizontal'
+            spacing: '12dp'
+            padding: '12dp'
             RoundedButton:
                 text: 'Translate'
                 on_press: root.capture()     
@@ -83,25 +94,30 @@
         Rectangle:
             pos:self.pos
             size: self.size
-    BoxLayout:
-        orientation: 'vertical'
+    GridLayout:
+        cols: 2
+        rows: 2
+        padding: ('10dp', '10dp', '10dp', '10dp')
+        spacing: '10dp'
         TextInput:
             id: text_untranslated
             hint_text: 'Input Text Here'
         Label:
             id: text_translated
             text: 'No text Input'
-            color: 1, 0, 0, 1
-        BoxLayout:
-            orientation:'horizontal'
-            RoundedButton:
-                text: "Return to menu"
-                on_press: 
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'menu'
-            RoundedButton:
-                text: "Translate"
-                on_press: root.translation()
+            color: 0, 0, 0, 1
+        RoundedButton:
+            text: "Return to menu"
+            size_hint_y: None
+            height: '125dp'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+        RoundedButton:
+            text: "Translate"
+            size_hint_y: None
+            height: '125dp'
+            on_press: root.translation()
 
 <TranslateHistory>:
     #background color
@@ -113,9 +129,8 @@
             size: self.size
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text:'History'
-            color: 1, 0, 0, 1
+        spacing: '12dp'
+        padding: '12dp'
         RoundedButton:
             text: "Return to menu"
             on_press: 
