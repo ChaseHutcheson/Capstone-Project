@@ -76,6 +76,9 @@
             MDFillRoundFlatButton:
                 text: 'Flip Output'
                 on_press: root.reverseOutput()
+            MDSwitch:
+                active: False
+                on_active: root.flipCamera()
   
 
 <TextTranslate>:

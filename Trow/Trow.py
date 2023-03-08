@@ -36,9 +36,8 @@ class PhotoTranslate(MDScreen):
         self.ids.photo_untranslated.text = f"{self.translation}"
         print(self.ids.photo_untranslated.text)
 
-    # def reverseOutput(self):
-    #     reverse = ' '.join([x[::-1] for x in self.translation.split(' ')])
-    #     self.ids.photo_untranslated.text = f"{reverse}"
+    def flipCamera(self):
+        cv2.flip(self.camera)
 
 class TextTranslate(MDScreen):
     def translation(self, **kwargs):
