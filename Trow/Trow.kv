@@ -67,18 +67,14 @@
             padding: '12dp'
             MDFillRoundFlatButton:
                 text: 'Translate'
+                size_hint_x: .5
                 on_press: root.capture()     
             MDFillRoundFlatButton:
                 text: "Return to menu"
+                size_hint_x: .5
                 on_press: 
                     root.manager.transition.direction = 'left'
                     root.manager.current = 'menu'
-            MDFillRoundFlatButton:
-                text: 'Flip Output'
-                on_press: root.reverseOutput()
-            MDSwitch:
-                active: False
-                on_active: root.flipCamera()
   
 
 <TextTranslate>:

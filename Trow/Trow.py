@@ -36,12 +36,12 @@ class PhotoTranslate(MDScreen):
         self.ids.photo_untranslated.text = f"{self.translation}"
         print(self.ids.photo_untranslated.text)
 
-    def flipCamera(self):
-        cv2.flip(self.camera)
-
 class TextTranslate(MDScreen):
-    def translation(self, **kwargs):
-        self.camera = self.ids['cam']
+    def translation(self):
+        text = self.ids.text_untranslated.text
+        translator = Translator()
+        translation = translator.translate(f'{text}', dest='es')
+        self.ids.text_translated.text = f"{translation.text}"
 
 
 class TranslateHistory(MDScreen):
