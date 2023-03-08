@@ -1,7 +1,8 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.screen import MDScreen
+from kivymd.uix.screenmanager import MDScreenManager
 from kivy.core.window import Window
 from kivy.metrics import dp
 from googletrans import Translator
@@ -14,10 +15,10 @@ import datetime
 Builder.load_file("Trow.kv")
 
 
-class MainMenu(Screen):
+class MainMenu(MDScreen):
     pass
 
-class PhotoTranslate(Screen):
+class PhotoTranslate(MDScreen):
     def capture(self):
         camera = self.ids['cam']
         timestr = time.strftime("%Y%m%d_%H%M%S")
@@ -27,20 +28,20 @@ class PhotoTranslate(Screen):
         self.ids.photo_untranslated.text = f"{translation}"
 
 
-class TextTranslate(Screen):
+class TextTranslate(MDScreen):
     def translation(self):
         text = self.ids.text_untranslated.text
         translator = Translator()
         translation = translator.translate(f'{text}', dest='es')
         self.ids.text_translated.text = f"{translation.text}"
 
-class TranslateHistory(Screen):
+class TranslateHistory(MDScreen):
     pass
 
 class Main(MDApp):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
-        sm = ScreenManager()
+        sm = MDScreenManager()
         sm.add_widget(MainMenu(name='menu'))
         sm.add_widget(PhotoTranslate(name='photo_translate'))
         sm.add_widget(TextTranslate(name='text_translate'))

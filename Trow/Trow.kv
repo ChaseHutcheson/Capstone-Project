@@ -10,46 +10,45 @@
             radius: [18]
 
 <MainMenu>:
-    #background color
-    canvas.before:
-        Color:
-            rgba: (1,1,1,1)
-        Rectangle:
-            pos:self.pos
-            size: self.size
-    BoxLayout:
-        orientation:'vertical'
+    MDBoxLayout:
+        orientation: 'vertical'
         spacing: '12dp'
-        padding: '12dp'
-        Image:
-            source: 'images/Trow_Logo_Black.png'
-            pos_hint: {'center_x': 0.5, 'center_y': 1}
-        Label:
+        padding: ('12dp', '12dp', '12dp', '12dp')
+        MDScreen:
+            MDAnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+            Image:
+                source: 'images/Trow_Logo_Black.png'
+                size_hint: None,None
+                size: '400dp','400dp'
+                pos_hint: {'center_x':.5, 'center_y':.5}
+        MDLabel:
             text:'Translations when you need.'
-            size_hint: 1,.25
-            color: 0, 0, 0, 1
+            halign: 'center'
+            font_style: 'H5'
             bold: True
-        GridLayout:
-            cols: 3
-            rows: 1
-            size_hint: 1,.5 
-            padding: ('10dp', '10dp', '10dp', '10dp')
-            spacing: '10dp'
-            RoundedButton:
-                text: "Photo Translate"
-                on_press: 
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'photo_translate'
-            RoundedButton:
-                text: "History"
-                on_press: 
-                    root.manager.transition.direction = 'up'
-                    root.manager.current = 'history'
-            RoundedButton:
-                text: "Text translate"
-                on_press: 
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'text_translate'
+        MDFillRoundFlatButton:
+            text: "Photo Translate"
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint_x:1
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'photo_translate'
+        MDFillRoundFlatButton:
+            text: "History"
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint_x:1
+            on_press: 
+                root.manager.transition.direction = 'up'
+                root.manager.current = 'history'
+        MDFillRoundFlatButton:
+            text: "Text translate"
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint_x:1
+            on_press: 
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'text_translate'
 
 
 <PhotoTranslate>:
@@ -109,14 +108,14 @@
         RoundedButton:
             text: "Return to menu"
             size_hint_y: None
-            height: '125dp'
+            height: root.height * .10
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
         RoundedButton:
             text: "Translate"
             size_hint_y: None
-            height: '125dp'
+            height: root.height * .10
             on_press: root.translation()
 
 <TranslateHistory>:
