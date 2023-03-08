@@ -59,7 +59,7 @@
         Rectangle:
             pos:self.pos
             size: self.size
-    BoxLayout:
+    MDBoxLayout:
         orientation:'vertical'
         spacing: '12dp'
         padding: '12dp'
@@ -67,18 +67,18 @@
             id: cam
             resolution: (640, 480)
             play: True
-        Label:
+        MDLabel:
             id: photo_untranslated
             text:''
             color: 0, 0, 0, 1
-        BoxLayout:
+        MDBoxLayout:
             orientation:'horizontal'
             spacing: '12dp'
             padding: '12dp'
-            RoundedButton:
+            MDFillRoundFlatButton:
                 text: 'Translate'
                 on_press: root.capture()     
-            RoundedButton:
+            MDFillRoundFlatButton:
                 text: "Return to menu"
                 on_press: 
                     root.manager.transition.direction = 'left'
@@ -93,29 +93,33 @@
         Rectangle:
             pos:self.pos
             size: self.size
-    GridLayout:
+    MDGridLayout:
         cols: 2
-        rows: 2
+        rows: 3
         padding: ('10dp', '10dp', '10dp', '10dp')
         spacing: '10dp'
+        MDLabel:
+            text: 'Input'
+        MDLabel:
+            text: 'Output'
         TextInput:
             id: text_untranslated
             hint_text: 'Input Text Here'
-        Label:
+        MDLabel:
             id: text_translated
             text: 'No text Input'
             color: 0, 0, 0, 1
-        RoundedButton:
+        MDFillRoundFlatButton:
             text: "Return to menu"
             size_hint_y: None
-            height: root.height * .10
+            size_hint_x: 0.5
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
-        RoundedButton:
+        MDFillRoundFlatButton:
             text: "Translate"
             size_hint_y: None
-            height: root.height * .10
+            size_hint_x:1
             on_press: root.translation()
 
 <TranslateHistory>:
@@ -126,11 +130,11 @@
         Rectangle:
             pos:self.pos
             size: self.size
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         spacing: '12dp'
         padding: '12dp'
-        RoundedButton:
+        MDFillRoundFlatButton:
             text: "Return to menu"
             on_press: 
                 root.manager.transition.direction = 'down'
