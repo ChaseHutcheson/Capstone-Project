@@ -22,8 +22,10 @@
         Image:
             source: 'images/Trow_Logo_Black.png'
             pos_hint: {'center_x': 0.5, 'center_y': 0.75}
-        BoxLayout:
-            orientation: 'horizontal'
+        GridLayout:
+            cols: 3
+            rows: 1
+            size_hint: 1,.5 
             padding: ('3dp', '3dp', '3dp', '3dp')
             spacing: '3dp'
             RoundedButton:
@@ -57,6 +59,10 @@
             id: cam
             resolution: (640, 480)
             play: True
+        Label:
+            id: photo_untranslated
+            text:''
+            color: 1, 0, 0, 1
         BoxLayout:
             orientation:'horizontal'
             RoundedButton:
