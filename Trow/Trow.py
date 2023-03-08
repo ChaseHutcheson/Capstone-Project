@@ -1,5 +1,6 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.core.camera import Camera
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.screen import MDScreen
@@ -21,20 +22,28 @@ class MainMenu(MDScreen):
 
 class PhotoTranslate(MDScreen):
     def capture(self):
-        camera = self.ids['cam']
+        self.camera = self.ids['cam']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        camera.export_to_png(f"{timestr}.png")
+        self.camera.export_to_png(f"{timestr}.png")
         img = Image.open(f"{timestr}.png")
-        translation = pytess.image_to_string(img)
-        self.ids.photo_untranslated.text = f"{translation}"
+        self.translation = pytess.image_to_string(img)
+        img_reverse = img.transpose(Image.FLIP_LEFT_RIGHT)
+        self.translation_reverse = pytess.image_to_string(img_reverse)
+        if self.translation != ' '.join([x[::-1] for x in self.translation_reverse.split(' ')]):
+            img_2 = Image.open(f"{timestr}.png")
+            img_2 = img_2.transpose(Image.FLIP_LEFT_RIGHT)
+            self.translation = pytess.image_to_string(img_2)
+        self.ids.photo_untranslated.text = f"{self.translation}"
+        print(self.ids.photo_untranslated.text)
 
+    # def reverseOutput(self):
+    #     reverse = ' '.join([x[::-1] for x in self.translation.split(' ')])
+    #     self.ids.photo_untranslated.text = f"{reverse}"
 
 class TextTranslate(MDScreen):
-    def translation(self):
-        text = self.ids.text_untranslated.text
-        translator = Translator()
-        translation = translator.translate(f'{text}', dest='es')
-        self.ids.text_translated.text = f"{translation.text}"
+    def translation(self, **kwargs):
+        self.camera = self.ids['cam']
+
 
 class TranslateHistory(MDScreen):
     pass

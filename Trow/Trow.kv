@@ -1,14 +1,3 @@
-<RoundedButton@Button>
-    background_color: (0,0,0,0)
-    background_normal: ''
-    canvas.before:
-        Color:
-            rgba: (37/255,150/255,190/255,1)
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [18]
-
 <MainMenu>:
     MDBoxLayout:
         orientation: 'vertical'
@@ -67,9 +56,10 @@
             id: cam
             resolution: (640, 480)
             play: True
+            mirror: True
         MDLabel:
             id: photo_untranslated
-            text:''
+            text:'No Text Found'
             color: 0, 0, 0, 1
         MDBoxLayout:
             orientation:'horizontal'
@@ -83,6 +73,9 @@
                 on_press: 
                     root.manager.transition.direction = 'left'
                     root.manager.current = 'menu'
+            MDFillRoundFlatButton:
+                text: 'Flip Output'
+                on_press: root.reverseOutput()
   
 
 <TextTranslate>:
@@ -100,8 +93,10 @@
         spacing: '10dp'
         MDLabel:
             text: 'Input'
+            size: '48dp','48dp'
         MDLabel:
             text: 'Output'
+            size: '48dp','48dp'
         TextInput:
             id: text_untranslated
             hint_text: 'Input Text Here'
