@@ -43,6 +43,7 @@ class PhotoTranslate(MDScreen):
         timestr = time.strftime("%Y%m%d_%H%M%S")
         camera.export_to_png(f"{timestr}.png")
         img = Image.open(f"{timestr}.png")
+        #!!!Remove!!! When needed
         img = img.transpose(Image.FLIP_LEFT_RIGHT)
         text = pytess.image_to_string(img)
         translator = Translator()
