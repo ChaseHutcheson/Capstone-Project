@@ -1,3 +1,8 @@
+from kivy import Config
+Config.set('graphics', 'width', '600')
+Config.set('graphics', 'height', '800')
+Config.set('graphics', 'minimum_width', '375')
+Config.set('graphics', 'minimum_height', '667')
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.core.camera import Camera
@@ -11,6 +16,7 @@ from googletrans import Translator
 import pytesseract as pytess
 pytess.pytesseract.tesseract_cmd = r'Trow\\Tesseract-OCR\\tesseract.exe'
 from PIL import Image
+from textblob import TextBlob
 import cv2
 import time
 import datetime
@@ -21,20 +27,54 @@ class MainMenu(MDScreen):
     pass
 
 class PhotoTranslate(MDScreen):
+    def set_language(self, value):
+        if value == "English":
+            self.selected_language = "en"
+        elif value == "German":
+            self.selected_language = "de"
+        elif value == "Spanish":
+            self.selected_language = "es"
+        elif value == "French":
+            self.selected_language = "fr"
+        elif value == "Italian":
+            self.selected_language = "it"
+        elif value == "Select Languages":
+            self.selected_language = "en"
+        
     def capture(self):
-        self.camera = self.ids['cam']
+        camera = self.ids['cam']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        self.camera.export_to_png(f"{timestr}.png")
+        camera.export_to_png(f"{timestr}.png")
         img = Image.open(f"{timestr}.png")
-        self.translation = pytess.image_to_string(img)
-        self.ids.photo_untranslated.text = f"{self.translation}"
+        img = img.transpose(Image.FLIP_LEFT_RIGHT)
+        text = pytess.image_to_string(img)
+        translator = Translator()
+        try: 
+            translated = translator.translate(f'{text}', dest=self.selected_language)
+        except AttributeError:
+            translated = translator.translate(f'{text}', dest=self.selected_language)
+        self.ids.photo_untranslated.text = f"{translated.text}"
         print(self.ids.photo_untranslated.text)
 
 class TextTranslate(MDScreen):
-    def translation(self):
+    def set_language(self, value):
+        if value == "English":
+            self.selected_language = "en"
+        elif value == "German":
+            self.selected_language = "de"
+        elif value == "Spanish":
+            self.selected_language = "es"
+        elif value == "French":
+            self.selected_language = "fr"
+        elif value == "Italian":
+            self.selected_language = "it"
+        elif value == "Select Languages":
+            self.selected_language = "en"
+
+    def translation(self): 
         text = self.ids.text_untranslated.text
         translator = Translator()
-        translation = translator.translate(f'{text}', dest='es')
+        translation = translator.translate(f'{text}', dest=self.selected_language)
         self.ids.text_translated.text = f"{translation.text}"
 
 

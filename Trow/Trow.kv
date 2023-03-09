@@ -1,3 +1,14 @@
+<RoundedDropdown@Spinner>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (33/255, 150/255, 243/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [20]
+
 <MainMenu>:
     MDBoxLayout:
         orientation: 'vertical'
@@ -34,7 +45,7 @@
         MDFillRoundFlatButton:
             text: "Text translate"
             pos_hint: {'center_x':.5, 'center_y':.5}
-            size_hint_x:1
+            size_hint_x: 1
             on_press: 
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'text_translate'
@@ -81,6 +92,13 @@
                     on_press: 
                         root.manager.transition.direction = 'left'
                         root.manager.current = 'menu'
+                RoundedDropdown:
+                    id: languages
+                    text: "Select Languages"
+                    values: ["English", "German", "Spanish", "French", "Italian"]
+                    size_hint_y: .72
+                    size_hint_min_x: 3
+                    on_text: root.set_language(languages.text)
   
 
 <TextTranslate>:
@@ -91,42 +109,55 @@
         Rectangle:
             pos:self.pos
             size: self.size
-    MDGridLayout:
-        cols: 2
-        rows: 3
-        padding: ('10dp', '10dp', '10dp', '10dp')
-        spacing: '10dp'
-        MDLabel:
-            text: 'Input'
-            halign: 'center'
-            valign: 'center'
-            bold: True
-            size_hint: None,None
-            size: root.width/2,'48dp'
-        MDLabel:
-            text: 'Output'
-            halign: 'center'
-            valign: 'center'
-            bold: True
-            size_hint: None,None
-            size: root.width * .5,'48dp'
-        TextInput:
-            id: text_untranslated
-            hint_text: 'Input Text Here'
-        MDLabel:
-            id: text_translated
-            text: 'No text Input'
-            color: 0, 0, 0, 1
-        MDFillRoundFlatButton:
-            text: "Return to menu"
-            size: root.width * .5,'38dp'
-            on_press:
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'
-        MDFillRoundFlatButton:
-            text: "Translate"
-            size: root.width * .46,'38dp'
-            on_press: root.translation()
+    BoxLayout:
+        orientation:'vertical'
+        MDGridLayout:
+            cols: 2
+            rows: 4
+            padding: ('10dp', '10dp', '10dp', '10dp')
+            spacing: '10dp'
+            MDLabel:
+                text: 'Input'
+                halign: 'center'
+                valign: 'center'
+                bold: True
+                size_hint: None,None
+                size: root.width/2,'48dp'
+            MDLabel:
+                text: 'Output'
+                halign: 'center'
+                valign: 'center'
+                bold: True
+                size_hint: None,None
+                size: root.width * .5,'48dp'
+            TextInput:
+                id: text_untranslated
+                hint_text: 'Input Text Here'
+            MDLabel:
+                id: text_translated
+                text: 'No text Input'
+                color: 0, 0, 0, 1
+            MDFillRoundFlatButton:
+                text: "Return to menu"
+                size: root.width * .5,'38dp'
+                on_press:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'menu'
+            MDFillRoundFlatButton:
+                text: "Translate"
+                size: root.width * .46,'38dp'
+                on_press: root.translation()
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: None, None   
+            size: root.width, 30
+            padding: ('10dp', '2dp', '6dp', '10dp')
+            RoundedDropdown:
+                id: languages
+                text: "Select Languages"
+                values: ["English", "German", "Spanish", "French", "Italian"]
+                size_hint_y: 2
+                on_text: root.set_language(languages.text)
 
 <TranslateHistory>:
     #background color
