@@ -27,12 +27,6 @@ class PhotoTranslate(MDScreen):
         self.camera.export_to_png(f"{timestr}.png")
         img = Image.open(f"{timestr}.png")
         self.translation = pytess.image_to_string(img)
-        img_reverse = img.transpose(Image.FLIP_LEFT_RIGHT)
-        self.translation_reverse = pytess.image_to_string(img_reverse)
-        if self.translation != ' '.join([x[::-1] for x in self.translation_reverse.split(' ')]):
-            img_2 = Image.open(f"{timestr}.png")
-            img_2 = img_2.transpose(Image.FLIP_LEFT_RIGHT)
-            self.translation = pytess.image_to_string(img_2)
         self.ids.photo_untranslated.text = f"{self.translation}"
         print(self.ids.photo_untranslated.text)
 

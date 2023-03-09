@@ -52,29 +52,35 @@
         orientation:'vertical'
         spacing: '12dp'
         padding: '12dp'
-        Camera:
-            id: cam
-            resolution: (640, 480)
-            play: True
-            mirror: True
-        MDLabel:
-            id: photo_untranslated
-            text:'No Text Found'
-            color: 0, 0, 0, 1
-        MDBoxLayout:
-            orientation:'horizontal'
-            spacing: '12dp'
-            padding: '12dp'
-            MDFillRoundFlatButton:
-                text: 'Translate'
-                size_hint_x: .5
-                on_press: root.capture()     
-            MDFillRoundFlatButton:
-                text: "Return to menu"
-                size_hint_x: .5
-                on_press: 
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'menu'
+
+        MDGridLayout:
+            cols: 2
+            rows: 1
+            Camera:
+                id: cam
+                resolution: (640, 480)
+                play: True
+                mirror: True
+            MDLabel:
+                id: photo_untranslated
+                text:'No Text Found'
+                color: 0, 0, 0, 1
+            MDBoxLayout:
+                orientation:'horizontal'
+                spacing: '12dp'
+                padding: '12dp'
+                size_hint: None,None
+                size: root.width,'75dp'
+                MDFillRoundFlatButton:
+                    text: 'Translate'
+                    size_hint_x: .5
+                    on_press: root.capture()     
+                MDFillRoundFlatButton:
+                    text: "Return to menu"
+                    size_hint_x: .5
+                    on_press: 
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'menu'
   
 
 <TextTranslate>:
@@ -92,10 +98,18 @@
         spacing: '10dp'
         MDLabel:
             text: 'Input'
-            size: '48dp','48dp'
+            halign: 'center'
+            valign: 'center'
+            bold: True
+            size_hint: None,None
+            size: root.width/2,'48dp'
         MDLabel:
             text: 'Output'
-            size: '48dp','48dp'
+            halign: 'center'
+            valign: 'center'
+            bold: True
+            size_hint: None,None
+            size: root.width * .5,'48dp'
         TextInput:
             id: text_untranslated
             hint_text: 'Input Text Here'
@@ -105,15 +119,13 @@
             color: 0, 0, 0, 1
         MDFillRoundFlatButton:
             text: "Return to menu"
-            size_hint_y: None
-            size_hint_x: 0.5
-            on_press: 
+            size: root.width * .5,'38dp'
+            on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
         MDFillRoundFlatButton:
             text: "Translate"
-            size_hint_y: None
-            size_hint_x:1
+            size: root.width * .46,'38dp'
             on_press: root.translation()
 
 <TranslateHistory>:
