@@ -16,10 +16,7 @@ from googletrans import Translator
 import pytesseract as pytess
 pytess.pytesseract.tesseract_cmd = r'Trow\\Tesseract-OCR\\tesseract.exe'
 from PIL import Image
-from textblob import TextBlob
-import cv2
 import time
-import datetime
 Builder.load_file("Trow.kv")
 
 
